@@ -4,4 +4,4 @@
 source("get_instance_data.R")
 
 # Render analysis
-rmarkdown::render("analysis.Rmd")
+rmarkdown::render("analysis.Rmd", output_file = "index.html")
