@@ -57,3 +57,5 @@ This is just a quick demo proof of concept by @jemus42@mastodon.social / @jemus4
 A more detailed analysis will come, and I'll probably scrape data daily for long-term analysis.
 
 The site is built in Rmarkdown, using the [material theme from juba/rmdformats](https://github.com/juba/rmdformats#material-format).
+
+The code for this project is [on GitHub](https://github.com/jemus42/mastodon-instance-stats).
