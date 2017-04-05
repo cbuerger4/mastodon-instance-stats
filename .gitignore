@@ -35,6 +35,7 @@ vignettes/*.pdf
 
 # Output
 *.html
+assets
 
 # Logged data
 data/*rds
