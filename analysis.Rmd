@@ -18,6 +18,8 @@ library(tidyverse)
 library(stringr)
 library(purrr)
 library(lubridate)
+library(ggplot2)
+library(hrbrthemes)
 
 ## Global options
 options(max.print="75")
@@ -27,8 +29,11 @@ opts_chunk$set(echo=FALSE,
                tidy=TRUE,
                comment=NA,
                message=FALSE,
-               warning=FALSE)
+               warning=FALSE,
+               fig.path="assets/plots/")
 opts_knit$set(width=75)
+
+theme_set(hrbrthemes::theme_ipsum())
 ```
 
 ```{r setup}
@@ -52,6 +57,33 @@ mastodon %>%
          Last_Data = data_last) %>%
   datatable()
 ```
+
+# Instances
+
+```{r instances_1}
+mastodon %>% 
+  group_by(date) %>%
+  summarize(n = length(unique(instance))) %>%
+  ggplot(data = ., aes(x = date, y = n)) +
+  geom_col() +
+  labs(title = "Number of Mastodon Instances",
+       x = "Date", y = "N")
+```
+
+
+# Users
+
+```{r users_1}
+mastodon %>% 
+  group_by(date) %>%
+  summarize(n = length(unique(users))) %>%
+  ggplot(data = ., aes(x = date, y = n)) +
+  geom_col() +
+  labs(title = "Number of Mastodon Users",
+       subtitle = "Total # Across All Tracked Instances",
+       x = "Date", y = "N")
+```
+
 
 # About
 
