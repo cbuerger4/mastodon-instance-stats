@@ -1,0 +1,59 @@
+---
+title: "Mastodon Data"
+date: "`r Sys.Date()`"
+output:
+  rmdformats::material:
+    highlight: kate
+---
+
+# Data Overview
+
+```{r knitr_init, echo=FALSE, cache=FALSE, include=FALSE}
+library(knitr)
+library(rmdformats)
+library(DT)
+library(tidyverse)
+library(stringr)
+library(purrr)
+library(lubridate)
+
+## Global options
+options(max.print="75")
+opts_chunk$set(echo=FALSE,
+	             cache=TRUE,
+               prompt=FALSE,
+               tidy=TRUE,
+               comment=NA,
+               message=FALSE,
+               warning=FALSE)
+opts_knit$set(width=75)
+```
+
+```{r setup}
+mastodon <- read_rds("data/mastodon.rds")
+```
+
+## Tracked instances
+
+Instances are scraped from [the list at  the tootsuite/mastodon repo](https://github.com/tootsuite/mastodon/blob/master/docs/Using-Mastodon/List-of-Mastodon-instances.md), if your instance is missing, please add it to the listed document.
+
+```{r instance_list}
+mastodon %>%
+  group_by(instance) %>%
+  summarise(n = n(), users_last = last(users), 
+            data_first = min(date), data_last = max(date)) %>%
+  arrange(desc(users_last)) %>%
+  rename(Instance = instance,
+         Data_Points = n,
+         Users_Last = users_last,
+         First_Data = data_first,
+         Last_Data = data_last) %>%
+  datatable()
+```
+
+# About
+
+This is just a quick demo proof of concept by @jemus42@mastodon.social / @jemus42 on twitter.  
+A more detailed analysis will come, and I'll probably scrape data daily for long-term analysis.
+
+The site is built in Rmarkdown, using the [material theme from juba/rmdformats](https://github.com/juba/rmdformats#material-format).
