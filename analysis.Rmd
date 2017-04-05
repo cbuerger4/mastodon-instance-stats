@@ -1,6 +1,6 @@
 ---
 title: "Mastodon Data"
-date: "`r Sys.Date()`"
+date: "`r format(Sys.time(), '%F %H:%M %z (%Z)')`"
 output:
   rmdformats::material:
     highlight: kate
