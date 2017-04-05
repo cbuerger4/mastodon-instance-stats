@@ -1,3 +1,5 @@
+#! /usr/bin/env Rscript
+
 # Scraping list of instances
 
 library(rvest)
@@ -5,6 +7,7 @@ library(tidyverse)
 library(stringr)
 library(purrr)
 library(lubridate)
+library(magrittr)
 
 instances <- read_html("https://github.com/tootsuite/mastodon/blob/master/docs/Using-Mastodon/List-of-Mastodon-instances.md") %>%
                html_nodes("td:nth-child(1)") %>%
@@ -67,6 +70,7 @@ mastodon %<>%
 
 ## Read old data, append new data
 
+if (!file.exists("data")) {dir.create("data")}
 if (file.exists("data/mastodon.rds")) {
 
 old <- read_rds("data/mastodon.rds")
