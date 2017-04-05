@@ -75,10 +75,11 @@ mastodon %>%
 
 ```{r users_1}
 mastodon %>% 
-  group_by(date) %>%
-  summarize(n = length(unique(users))) %>%
+  group_by(instance, date) %>%
+  summarize(n = sum(users)) %>%
   ggplot(data = ., aes(x = date, y = n)) +
   geom_col() +
+  scale_y_continuous(labels = scales::comma_format()) +
   labs(title = "Number of Mastodon Users",
        subtitle = "Total # Across All Tracked Instances",
        x = "Date", y = "N")
