@@ -53,7 +53,12 @@ get_instance_stats <- function(instance_url) {
 
 ## Aggregate list of per-instance stats
 
-mastodon <- purrr::map_df(instances, function(x) {print(x); return(get_instance_stats(x))})
+mastodon <- purrr::map_df(instances, function(x) {
+    cat("Getting data for instance ")
+    cat(x)
+    cat("\n")
+    return(get_instance_stats(x))
+  })
 
 ## Append timestamps
 mastodon %<>%
@@ -61,8 +66,16 @@ mastodon %<>%
          time = lubridate::now("UTC"))
 
 ## Read old data, append new data
+
+if (file.exists("data/mastodon.rds")) {
+
 old <- read_rds("data/mastodon.rds")
 new <- bind_rows(old, mastodon)
 
 ## Write new, full data
 write_rds(new, path = "data/mastodon.rds")
+rm(old, new)
+
+} else {
+  write_rds(mastodon, path = "data/mastodon.rds")
+}
