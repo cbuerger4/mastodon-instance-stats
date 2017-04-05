@@ -4,6 +4,8 @@ date: "`r Sys.Date()`"
 output:
   rmdformats::material:
     highlight: kate
+    self_contained: no
+    lib_dir: "assets"
 ---
 
 # Data Overview
