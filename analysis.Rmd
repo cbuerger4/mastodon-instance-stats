@@ -58,6 +58,14 @@ mastodon %>%
   datatable()
 ```
 
+## Raw data
+
+```{r raw}
+mastodon %>%
+  datatable()
+```
+
+
 # Instances
 
 ```{r instances_1}
