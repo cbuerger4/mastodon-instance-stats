@@ -95,10 +95,11 @@ mastodon %>%
 
 ```{r users_2}
 mastodon %>%
-  ggplot(data = ., aes(x = time, y = users)) +
+  ggplot(data = ., aes(x = time, y = users, color = instance)) +
   geom_point(size = 1.5) +
   geom_path() +
   scale_y_continuous(labels = scales::comma_format()) +
+  scale_color_discrete(guide = F) +
   labs(title = "Number of Mastodon Users",
        subtitle = "Users per Instance",
        x = "Date", y = "N")
