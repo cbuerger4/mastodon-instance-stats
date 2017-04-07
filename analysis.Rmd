@@ -2,7 +2,7 @@
 title: "Mastodon Data"
 date: "`r format(Sys.time(), '%F %H:%M %z (%Z)')`"
 output:
-  rmdformats::material:
+  rmdformats::readthedown:
     highlight: kate
     self_contained: no
     lib_dir: "assets"
@@ -30,7 +30,8 @@ opts_chunk$set(echo=FALSE,
                comment=NA,
                message=FALSE,
                warning=FALSE,
-               fig.path="assets/plots/")
+               fig.path="assets/plots/",
+               fig.width=7)
 opts_knit$set(width=75)
 
 theme_set(hrbrthemes::theme_ipsum())
@@ -71,6 +72,10 @@ mastodon %>%
 
 # Instances
 
+## Number of Instances
+
+Limited by available data.
+
 ```{r instances_1}
 mastodon %>% 
   group_by(date) %>%
@@ -81,6 +86,42 @@ mastodon %>%
        x = "Date", y = "N")
 ```
 
+## Number of Users per Instance
+
+Current data only.
+
+```{r instances_2}
+mastodon %>%
+  filter(time == max(time)) %>%
+  ggplot(data = ., aes(x = users)) +
+  geom_histogram(binwidth = 100) +
+  labs(title = "Number of Users per Mastodon Instance",
+       x = "User #", y = "Frequency")
+```
+
+### Excluding `mastodon.social`
+
+```{r instances_3}
+mastodon %>%
+  filter(time == max(time), instance != "mastodon.social") %>%
+  ggplot(data = ., aes(x = users)) +
+  geom_histogram(binwidth = 100) +
+  labs(title = "Number of Users per Mastodon Instance",
+       subtitle = "Excluding mastodon.social",
+       x = "User #", y = "Frequency")
+```
+
+## Toots per Instance (Excluding `mastodon.social`)
+
+```{r instances_4}
+mastodon %>%
+  filter(time == max(time), instance != "mastodon.social") %>%
+  ggplot(data = ., aes(x = toots)) +
+  geom_histogram(binwidth = 100) +
+  labs(title = "Number of Toots per Mastodon Instance",
+       subtitle = "Excluding mastodon.social",
+       x = "Toot #", y = "Frequency")
+```
 
 # Users
 
