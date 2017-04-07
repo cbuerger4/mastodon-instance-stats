@@ -83,8 +83,8 @@ mastodon %>%
 
 ```{r users_1}
 mastodon %>% 
-  group_by(instance, date) %>%
-  summarize(n = sum(users)) %>%
+  group_by(date, instance) %>%
+  summarize(n = max(users)) %>%
   ggplot(data = ., aes(x = date, y = n)) +
   geom_col() +
   scale_y_continuous(labels = scales::comma_format()) +
@@ -93,6 +93,16 @@ mastodon %>%
        x = "Date", y = "N")
 ```
 
+```{r users_2}
+mastodon %>%
+  ggplot(data = ., aes(x = time, y = users)) +
+  geom_point(size = 1.5) +
+  geom_path() +
+  scale_y_continuous(labels = scales::comma_format()) +
+  labs(title = "Number of Mastodon Users",
+       subtitle = "Users per Instance",
+       x = "Date", y = "N")
+```
 
 # About
 
