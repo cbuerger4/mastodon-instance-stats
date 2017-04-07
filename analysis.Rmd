@@ -42,7 +42,9 @@ mastodon <- read_rds("data/mastodon.rds")
 
 ## Tracked instances
 
-Instances are scraped from [the list at  the tootsuite/mastodon repo](https://github.com/tootsuite/mastodon/blob/master/docs/Using-Mastodon/List-of-Mastodon-instances.md), if your instance is missing, please add it to the listed document.
+For the first few days I scraped the active instances from [the list at  the tootsuite/mastodon repo](https://github.com/tootsuite/mastodon/blob/master/docs/Using-Mastodon/List-of-Mastodon-instances.md), but since it doesn't update regularly because that requires merging pull requests, I switched to the list over at [instances.mastodon.xyz](https://instances.mastodon.xyz/). Please add your instance to this list if you don't find it on here.
+
+The actual instance data is still scraped from the instance's own about page.
 
 ```{r instance_list}
 mastodon %>%

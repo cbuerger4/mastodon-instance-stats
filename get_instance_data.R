@@ -9,8 +9,12 @@ library(purrr)
 library(lubridate)
 library(magrittr)
 
-instances <- read_html("https://github.com/tootsuite/mastodon/blob/master/docs/Using-Mastodon/List-of-Mastodon-instances.md") %>%
-               html_nodes("td:nth-child(1)") %>%
+# instances <- read_html("https://github.com/tootsuite/mastodon/blob/master/docs/Using-Mastodon/List-of-Mastodon-instances.md") %>%
+#                html_nodes("td:nth-child(1)") %>%
+#   html_text()
+
+instances <- read_html("https://instances.mastodon.xyz/") %>%
+  html_nodes("td:nth-child(2)") %>%
   html_text()
 
 
