@@ -37,7 +37,8 @@ theme_set(hrbrthemes::theme_ipsum())
 ```
 
 ```{r setup}
-mastodon <- read_rds("data/mastodon.rds")
+mastodon <- read_rds("data/mastodon.rds") %>%
+  filter(instance != "sdfn-01.ninjawedding.org")
 ```
 
 ## Tracked instances
