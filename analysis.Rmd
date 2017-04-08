@@ -141,6 +141,19 @@ mastodon %>%
        y = "# of Instances", x = "Date", fill = "Handles IPv6")
 ```
 
+## HTTPS Score
+
+Only latest data.
+
+```{r instances_HTTPS}
+mastodon %>%
+  ggplot(data = ., aes(x = https_score, fill = https_rank)) +
+  geom_bar(position = "dodge") +
+  scale_fill_brewer(palette = "Set1") +
+  labs(title = "Mastodon Instances by HTTPS Score",
+       y = "# of Instances", x = "HTTPS Score", fill = "HTTPS Rank")
+```
+
 
 ## Toots per Instance (Excluding `mastodon.social`)
 
