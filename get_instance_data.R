@@ -8,7 +8,7 @@ library(lubridate)
 
 mastodon <- jsonlite::fromJSON("https://instances.mastodon.xyz/instances.json") %>%
   rename(instance = name,
-         tootls = statuses,
+         toots = statuses,
          interconnectivity = connections) %>%
   mutate(date = lubridate::today("UTC"),
          time = lubridate::now("UTC"))
