@@ -110,6 +110,19 @@ mastodon %>%
        subtitle = "Excluding mastodon.social",
        x = "User #", y = "Frequency")
 ```
+## Open vs. Closes Instances
+
+```{r instances_registration}
+mastodon %>%
+  group_by(date, open_reg) %>%
+  tally() %>%
+  ggplot(data = ., aes(x = date, y = n, fill = open_reg)) +
+  geom_col() +
+  scale_fill_brewer(palette = "Set1") +
+  labs(title = "Mastodon Instances by Registration Status",
+       y = "# of Instances", x = "Date", fill = "Registration")
+```
+
 
 ## Toots per Instance (Excluding `mastodon.social`)
 
