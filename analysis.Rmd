@@ -110,6 +110,7 @@ mastodon %>%
        subtitle = "Excluding mastodon.social",
        x = "User #", y = "Frequency")
 ```
+
 ## Open vs. Closes Instances
 
 ```{r instances_registration}
