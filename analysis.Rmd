@@ -80,7 +80,9 @@ mastodon %>%
   ggplot(data = ., aes(x = reorder(tld, n), y = perc)) +
   geom_col() +
   scale_y_continuous(breaks = seq(0, 100, 1)) +
-  coord_flip()
+  coord_flip() +
+  labs(title = "TLDs Used by Mastodon Instances",
+       x = "TLD", y = "Frequency (%)")
 ```
 
 ## TLDs in a Table
