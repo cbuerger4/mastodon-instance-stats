@@ -143,7 +143,7 @@ mastodon %>%
 ```{r instances_registration}
 mastodon %>%
   group_by(date, open_reg) %>%
-  filter(!is.na(open_reg)) %>%
+  filter(!is.na(open_reg), time == max(time)) %>%
   tally() %>%
   ggplot(data = ., aes(x = date, y = n, fill = open_reg)) +
   geom_col() +
