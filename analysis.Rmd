@@ -73,12 +73,13 @@ mastodon %>%
 
 ```{r TLDs, fig.height=9}
 mastodon %>%
+  distinct(instance) %>%
   mutate(tld = stringr::str_extract(instance, "\\.\\w*$")) %>%
   group_by(tld) %>%
   summarize(n = n(), perc = round((n()/nrow(.)) * 100, 2)) %>%
   ggplot(data = ., aes(x = reorder(tld, n), y = perc)) +
   geom_col() +
-  scale_y_continuous(breaks = seq(0, 100, 10), labels = scales::percent_format()) +
+  scale_y_continuous(breaks = seq(0, 100, 1)) +
   coord_flip()
 ```
 
@@ -86,6 +87,7 @@ mastodon %>%
 
 ```{r TLDs_table}
 mastodon %>%
+  distinct(instance) %>%
   mutate(tld = stringr::str_extract(instance, "\\.\\w*$")) %>%
   group_by(tld) %>%
   summarize(n = n(), perc = round((n()/nrow(.)) * 100, 2)) %>%
