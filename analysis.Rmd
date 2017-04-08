@@ -19,7 +19,7 @@ library(stringr)
 library(purrr)
 library(lubridate)
 library(ggplot2)
-library(hrbrthemes)
+library(tadaatoolbox)
 
 ## Global options
 options(max.print="75")
@@ -34,7 +34,7 @@ opts_chunk$set(echo=FALSE,
                fig.width=7)
 opts_knit$set(width=75)
 
-theme_set(hrbrthemes::theme_ipsum())
+theme_set(tadaatoolbox::theme_readthedown())
 ```
 
 ```{r setup}
