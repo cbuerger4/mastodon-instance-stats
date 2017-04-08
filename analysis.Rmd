@@ -111,7 +111,7 @@ mastodon %>%
        x = "User #", y = "Frequency")
 ```
 
-## Open vs. Closes Instances
+## Open vs. Closed Instances
 
 ```{r instances_registration}
 mastodon %>%
@@ -124,6 +124,21 @@ mastodon %>%
   labs(title = "Mastodon Instances by Registration Status",
        subtitle = "Excluding Instances with Unknown Registration Status",
        y = "# of Instances", x = "Date", fill = "Registration")
+```
+
+## IPv6 Status
+
+```{r instances_IPv6}
+mastodon %>%
+  group_by(date, ipv6) %>%
+  filter(!is.na(ipv6)) %>%
+  tally() %>%
+  ggplot(data = ., aes(x = date, y = n, fill = ipv6)) +
+  geom_col() +
+  scale_fill_brewer(palette = "Set1") +
+  labs(title = "Mastodon Instances by IPv6 Status",
+       subtitle = "Excluding Instances with Unknown IPv6 Status",
+       y = "# of Instances", x = "Date", fill = "Handles IPv6")
 ```
 
 
