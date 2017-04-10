@@ -39,7 +39,7 @@ theme_set(tadaatoolbox::theme_readthedown())
 
 ```{r setup}
 mastodon <- read_rds("data/mastodon.rds") %>%
-  filter(instance != "sdfn-01.ninjawedding.org")
+  filter(instance != "sdfn-01.ninjawedding.org", users != 104877443673)
 ```
 
 ## Tracked instances
@@ -70,7 +70,7 @@ mastodon %>%
 
 # TLDs
 
-```{r TLDs, fig.height=9}
+```{r TLDs, fig.height=11}
 mastodon %>%
   distinct(instance) %>%
   mutate(tld = stringr::str_extract(instance, "\\.\\w*$")) %>%
@@ -175,11 +175,10 @@ Only latest data.
 ```{r instances_HTTPS}
 mastodon %>%
   filter(time == max(time)) %>%
-  ggplot(data = ., aes(x = https_score, fill = https_rank)) +
-  geom_bar(position = "dodge") +
-  scale_fill_brewer(palette = "Set1") +
+  ggplot(data = ., aes(x = https_score)) +
+  geom_histogram(binwidth = 5) +
   labs(title = "Mastodon Instances by HTTPS Score",
-       y = "# of Instances", x = "HTTPS Score", fill = "HTTPS Rank")
+       y = "# of Instances", x = "HTTPS Score")
 ```
 
 
@@ -187,7 +186,7 @@ mastodon %>%
 
 Only latest data.
 
-```{r instances_4}
+```{r instances_bytoot_hist}
 mastodon %>%
   filter(time == max(time), instance != "mastodon.social") %>%
   ggplot(data = ., aes(x = toots)) +
