@@ -245,8 +245,8 @@ mastodon %>%
 
 # About
 
-This is just a quick demo proof of concept by @jemus42@mastodon.social / @jemus42 on twitter.  
-A more detailed analysis will come, and I'll probably scrape data daily for long-term analysis.
+This is just a quick demo proof of concept by [@jemus42@mastodon.social](https://mastodon.social/@jemus42) / @jemus42 on birdsite.  
+This is still a work in progress and there's a lot to be done.
 
 The site is built in Rmarkdown, using the [readthedown theme from juba/rmdformats](https://github.com/juba/rmdformat).
 
