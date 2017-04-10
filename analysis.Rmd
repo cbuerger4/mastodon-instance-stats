@@ -129,7 +129,7 @@ mastodon %>%
   scale_y_continuous(breaks = seq(0, 100, 25), minor_breaks = seq(0, 100, 5)) +
   theme(axis.text.x = element_text(angle = 45, vjust = 0.4)) +
   labs(title = "Number of Users per Mastodon Instance",
-       x = "User #", y = "Frequency")
+       x = "User Count of Instance", y = "Frequency of Instances of that Size")
 ```
 
 ### Excluding `mastodon.social`
