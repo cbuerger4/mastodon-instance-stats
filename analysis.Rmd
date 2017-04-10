@@ -220,8 +220,35 @@ mastodon %>%
   scale_color_discrete(guide = F) +
   labs(title = "Number of Mastodon Users",
        subtitle = "Users per Instance",
+       x = "Date", y = "# of Toots")
+```
+
+# Toots
+
+```{r toots_total}
+mastodon %>%
+  group_by(date) %>%
+  filter(time == max(time)) %>%
+  summarize(toots = sum(toots, na.rm = T)) %>%
+  ggplot(data = ., aes(x = date, y = toots)) +
+  geom_col() +
+  scale_y_continuous(labels = scales::comma_format()) +
+  labs(title = "Number of Toots",
+       x = "Date", y = "# of Toots")
+```
+
+```{r toots_per_instance}
+mastodon %>%
+  ggplot(data = ., aes(x = time, y = toots, color = instance)) +
+  geom_point(size = 1.5) +
+  geom_path() +
+  scale_y_continuous(labels = scales::comma_format()) +
+  scale_color_discrete(guide = F) +
+  labs(title = "Number of Toots per Instance",
+       subtitle = "Toots per Instance",
        x = "Date", y = "N")
 ```
+
 
 # About
 
