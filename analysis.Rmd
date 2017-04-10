@@ -132,18 +132,6 @@ mastodon %>%
        x = "User Count of Instance", y = "Frequency of Instances of that Size")
 ```
 
-### Excluding `mastodon.social`
-
-```{r instances_3}
-mastodon %>%
-  filter(time == max(time), instance != "mastodon.social") %>%
-  ggplot(data = ., aes(x = users)) +
-  geom_histogram(binwidth = 100) +
-  labs(title = "Number of Users per Mastodon Instance",
-       subtitle = "Excluding mastodon.social",
-       x = "User #", y = "Frequency")
-```
-
 ## Open vs. Closed Instances
 
 ```{r instances_registration}
