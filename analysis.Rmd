@@ -110,6 +110,7 @@ mastodon %>%
   ggplot(data = ., aes(x = date, y = n)) +
   geom_col() +
   labs(title = "Number of Mastodon Instances",
+       subtitle = "Switched to Instance List at instances.mastodon.xyz on Apr 7",
        x = "Date", y = "N")
 ```
 
