@@ -65,8 +65,11 @@ mastodon %>%
 
 ## Raw data
 
+Latest available only.
+
 ```{r raw}
 mastodon %>%
+  filter(time == max(time, na.rm = TRUE)) %>%
   datatable(rownames = F)
 ```
 
