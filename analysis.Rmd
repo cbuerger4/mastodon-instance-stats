@@ -115,6 +115,7 @@ mastodon %>%
   summarize(n = length(unique(instance))) %>%
   ggplot(data = ., aes(x = date, y = n)) +
   geom_col() +
+  scale_y_continuous(breaks = seq(0, 10000, 100), minor_breaks = seq(0, 10000, 25)) +
   labs(title = "Number of Mastodon Instances",
        subtitle = "Switched to Instance List at instances.mastodon.xyz on Apr 7",
        x = "Date", y = "N")
@@ -151,6 +152,7 @@ mastodon %>%
   tally() %>%
   ggplot(data = ., aes(x = date, y = n, fill = open_reg)) +
   geom_col() +
+  scale_y_continuous(breaks = seq(0, 10000, 100), minor_breaks = seq(0, 10000, 25)) +
   scale_fill_brewer(palette = "Set1") +
   labs(title = "Mastodon Instances by Registration Status",
        subtitle = "Excluding Instances with Unknown Registration Status",
@@ -166,6 +168,7 @@ mastodon %>%
   tally() %>%
   ggplot(data = ., aes(x = date, y = n, fill = ipv6)) +
   geom_col() +
+  scale_y_continuous(breaks = seq(0, 10000, 100), minor_breaks = seq(0, 10000, 25)) +
   scale_fill_brewer(palette = "Set1") +
   labs(title = "Mastodon Instances by IPv6 Status",
        subtitle = "Excluding Instances with Unknown IPv6 Status",
