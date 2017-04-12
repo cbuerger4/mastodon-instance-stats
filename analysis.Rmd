@@ -1,6 +1,6 @@
 ---
 title: "Mastodon Data"
-date: "`r format(Sys.time(), '%F %H:%M %z (%Z)')`"
+date: "`r format(Sys.time(), '%F %H:%M (%Z)')`"
 output:
   rmdformats::readthedown:
     highlight: kate
@@ -40,6 +40,8 @@ theme_set(tadaatoolbox::theme_readthedown())
 ```{r setup}
 mastodon <- read_rds("data/mastodon.rds") %>%
   filter(instance != "sdfn-01.ninjawedding.org", users != 104877443673)
+
+TLDs <- read_rds("TLDs.rds")
 ```
 
 ## Tracked instances
@@ -76,8 +78,10 @@ mastodon %>%
   mutate(tld = stringr::str_extract(instance, "\\.\\w*$")) %>%
   group_by(tld) %>%
   summarize(n = n(), perc = round((n()/nrow(.)) * 100, 2)) %>%
+  left_join(TLDs, by = c("tld" = "tld")) %>%
   ggplot(data = ., aes(x = reorder(tld, n), y = perc)) +
   geom_col() +
+  facet_wrap(~type, ncol = 1, scales = "free") +
   scale_y_continuous(breaks = seq(0, 100, 1)) +
   coord_flip() +
   labs(title = "TLDs Used by Mastodon Instances",
@@ -92,6 +96,7 @@ mastodon %>%
   mutate(tld = stringr::str_extract(instance, "\\.\\w*$")) %>%
   group_by(tld) %>%
   summarize(n = n(), perc = round((n()/nrow(.)) * 100, 2)) %>%
+  left_join(TLDs, by = c("tld" = "tld")) %>%
   arrange(desc(perc)) %>%
   datatable(rownames = F)
 ```
