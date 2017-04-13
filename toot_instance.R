@@ -19,4 +19,4 @@ toot <- paste0(instance$instance,
                str_to_upper(instance$open_reg), "!")
 toot <- paste0("'", toot, "'")
 
-system(command = paste("toot", toot))
+system(command = paste("/usr/local/bin/toot", toot))
