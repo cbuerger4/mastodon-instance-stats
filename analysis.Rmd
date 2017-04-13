@@ -75,6 +75,8 @@ mastodon %>%
 
 # TLDs
 
+For further information, see [this list](https://en.wikipedia.org/wiki/List_of_Internet_top-level_domains).
+
 ```{r TLDs, fig.height=7}
 masto_tlds <- mastodon %>%
   distinct(instance) %>%
@@ -258,7 +260,7 @@ mastodon %>%
 
 # About
 
-This is just a quick demo proof of concept by [@jemus42@mastodon.social](https://mastodon.social/@jemus42) / @jemus42 on birdsite.  
+This is just a quick demo proof of concept by [\@jemus42\@misanthropy.wang](https://misanthropy.wang/@jemus42) / @jemus42 on birdsite.  
 This is still a work in progress and there's a lot to be done.
 
 The site is built in Rmarkdown, using the [readthedown theme from juba/rmdformats](https://github.com/juba/rmdformat).
