@@ -183,11 +183,24 @@ Only latest data.
 
 ```{r instances_HTTPS}
 mastodon %>%
-  filter(time == max(time)) %>%
-  ggplot(data = ., aes(x = https_score)) +
-  geom_histogram(binwidth = 5) +
-  labs(title = "Mastodon Instances by HTTPS Score",
-       y = "# of Instances", x = "HTTPS Score")
+  filter(time == max(time), !is.na(https_rank)) %>%
+  group_by(https_rank) %>%
+  tally() %>%
+  mutate(rank_g = case_when(
+    grepl("A", .$https_rank) ~ "Good",
+    grepl("B", .$https_rank) ~ "Okay",
+    grepl("F", .$https_rank) ~ "Problematic",
+    TRUE ~ "Other"
+  )) %>%
+  ggplot(data = ., aes(x = reorder(https_rank, n), y = n, fill = rank_g)) +
+  geom_col(alpha = .7) +
+  coord_flip() +
+  scale_fill_manual(values = c("Good" = "darkgreen", 
+                               "Okay" = "darkblue", 
+                               "Problematic" = "darkred",
+                               "Other" = "gray")) +
+  labs(title = "Mastodon Instances by HTTPS Rank",
+       y = "# of Instances", x = "HTTPS Rank", fill = "Status")
 ```
 
 
