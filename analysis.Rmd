@@ -41,6 +41,11 @@ theme_set(tadaatoolbox::theme_readthedown())
 mastodon <- read_rds("data/mastodon.rds") %>%
   filter(instance != "sdfn-01.ninjawedding.org", users != 104877443673)
 
+topinst <- mastodon %>%
+  filter(time == max(time, na.rm = TRUE)) %>%
+  top_n(n = 5, wt = users) %>%
+  arrange(desc(users))
+
 TLDs <- read_rds("TLDs.rds")
 ```
 
@@ -144,6 +149,26 @@ mastodon %>%
   labs(title = "Number of Users per Mastodon Instance",
        x = "User Count of Instance", y = "Frequency of Instances of that Size")
 ```
+
+## Top Instance History
+
+```{r instances_top_hist}
+mastodon %>%
+  filter(instance %in% topinst$instance) %>%
+  mutate(instance = factor(instance, 
+                           levels = unique(instance[instance %in% topinst$instance]),
+                           ordered = T)) %>%
+  ggplot(data = ., aes(x = time, y = users, color = instance)) +
+  geom_point() +
+  geom_path() +
+  scale_y_comma(breaks = seq(0, 10e6, 5000), 
+                minor_breaks = seq(0, 10e6, 1000)) +
+  scale_color_brewer(palette = "Set2") +
+  labs(title = "Top 5 Mastodon Instances over Time",
+       subtitle = "User Counts from instances.mastodon.xyz",
+       x = "Date", y = "User #", color = "Instance")
+```
+
 
 ## Open vs. Closed Instances
 
