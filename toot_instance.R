@@ -8,8 +8,10 @@ library(stringr)
 
 instance <- read_rds("data/mastodon.rds") %>%
   filter(time == max(time, na.rm = TRUE)) %>%
-  select(instance, users, toots, open_reg) %>%
-  slice(sample(nrow(.), 1))
+  select(instance, users, toots, open_reg)
+
+diceroll <- as.numeric(format(Sys.time(), "%s"))/60 %% nrow(instance)
+instance <- instance %>% slice(sample(diceroll, 1))
 
 toot <- paste0(instance$instance,
                " (", instance$users, " User(s), ",
