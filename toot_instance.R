@@ -13,7 +13,7 @@ instance <- read_rds("data/mastodon.rds") %>%
 
 toot <- paste0(instance$instance,
                " (", instance$users, " User(s), ",
-               instance$toots, " Toot(s), and currently ",
+               instance$toots, " Toots) is currently ",
                str_to_upper(instance$open_reg), "!")
 toot <- paste0("'", toot, "'")
 
