@@ -7,7 +7,9 @@ library(readr)
 library(stringr)
 library(mastodon)
 
-instance <- read_rds("data/mastodon.rds") %>%
+mastodon <- read_rds("data/mastodon.rds")
+
+instance <-  mastodon %>%
   filter(time == max(time, na.rm = TRUE)) %>%
   select(instance, users, toots, open_reg)
 
@@ -32,10 +34,11 @@ mastodon %>%
   theme(legend.position = "top") -> plot
 
 ## Toot stuff out
+# Using devtools::install_github('ThomasChln/mastodon')
 
 credentials <- jsonlite::fromJSON("~/.config/mastodon-rstats.json")
 
-token = login(credentials$url, credentials$user, credentials$pass)
+token <- login(credentials$url, credentials$user, credentials$pass)
 
 #post_status(token, toot)
 
