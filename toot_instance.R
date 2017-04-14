@@ -23,17 +23,23 @@ toot <- paste0(instance$instance,
                instance$toots, " Toots\n…is currently ",
                str_to_upper(instance$open_reg), "!\n#InstanceData")
 
+if (instance$users > 4) {
+
 mastodon %>%
   filter(instance == instance$instance) %>%
   ggplot(data = ., aes(x = time, y = users, fill = open_reg)) +
   geom_path() +
   geom_point(shape = 21, colour = "black", size = 2, stroke = .5) +
+  scale_y_continuous(breaks = scales::pretty_breaks(),
+                     labels = scales::comma_format()) +
   labs(title = "Instance User History",
        subtitle = instance$instance,
        x = "Date", y = "User #", fill = "Registrations",
        caption = format(Sys.time(), '%F %H:%M (%Z)')) +
   tadaatoolbox::theme_readthedown() +
   theme(legend.position = "top") -> plot
+
+}
 
 ## Toot stuff out
 # Using devtools::install_github('ThomasChln/mastodon')
@@ -42,6 +48,8 @@ credentials <- jsonlite::fromJSON("~/.config/mastodon-rstats.json")
 
 token <- login(credentials$url, credentials$user, credentials$pass)
 
-#post_status(token, toot)
-
-post_ggplot(token, toot, plot)
+if (instance$users < 5) {
+  post_status(token, toot)
+} else {
+  post_ggplot(token, toot, plot)
+}
