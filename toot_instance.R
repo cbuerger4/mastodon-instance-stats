@@ -5,7 +5,9 @@ library(jsonlite)
 library(dplyr)
 library(readr)
 library(stringr)
-library(mastodon)
+library(mastodon) # devtools::install_github('ThomasChln/mastodon')
+library(ggplot2)
+library(tadaatoolbox) # Only for the plot theme
 
 mastodon <- read_rds("data/mastodon.rds")
 
