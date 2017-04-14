@@ -21,7 +21,7 @@ instance <- instance %>% slice(sample(diceroll, 1))
 toot <- paste0(instance$instance,
                "\n", instance$users, " User(s), ",
                instance$toots, " Toots\n…is currently ",
-               str_to_upper(instance$open_reg), "!")
+               str_to_upper(instance$open_reg), "!\n#InstanceData")
 
 mastodon %>%
   filter(instance == instance$instance) %>%
