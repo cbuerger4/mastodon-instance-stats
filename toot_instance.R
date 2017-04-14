@@ -35,7 +35,7 @@ mastodon %>%
                      labels = scales::comma_format()) +
   labs(title = "Instance User History",
        subtitle = instance$instance,
-       x = "Date", y = "User #", fill = "Registrations",
+       x = "", y = "User #", fill = "Registrations",
        caption = paste0(latest_timestamp, " via instances.mastodon.xyz")) +
   tadaatoolbox::theme_readthedown() +
   theme(legend.position = "top") -> plot
