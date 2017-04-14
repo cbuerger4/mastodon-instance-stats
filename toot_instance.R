@@ -9,7 +9,8 @@ library(mastodon) # devtools::install_github('ThomasChln/mastodon')
 library(ggplot2)
 library(tadaatoolbox) # Only for the plot theme
 
-mastodon <- read_rds("data/mastodon.rds")
+mastodon         <- read_rds("data/mastodon.rds")
+latest_timestamp <- max(mastodon$time)
 
 instance <-  mastodon %>%
   filter(time == max(time, na.rm = TRUE)) %>%
@@ -35,7 +36,7 @@ mastodon %>%
   labs(title = "Instance User History",
        subtitle = instance$instance,
        x = "Date", y = "User #", fill = "Registrations",
-       caption = format(Sys.time(), '%F %H:%M (%Z)')) +
+       caption = paste0(latest_timestamp, " via instances.mastodon.xyz")) +
   tadaatoolbox::theme_readthedown() +
   theme(legend.position = "top") -> plot
 

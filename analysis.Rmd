@@ -47,6 +47,8 @@ topinst <- mastodon %>%
   arrange(desc(users))
 
 TLDs <- read_rds("TLDs.rds")
+
+latest_timestamp <- max(mastodon$time)
 ```
 
 ## Tracked instances
@@ -98,7 +100,8 @@ masto_tlds %>%
   scale_y_continuous(breaks = seq(0, 100, 5), minor_breaks = seq(0, 100, 1)) +
   coord_flip() +
   labs(title = "TLDs Used by Mastodon Instances",
-       x = "TLD Group", y = "% of Instances")
+       x = "TLD Group", y = "% of Instances",
+       caption = latest_timestamp)
 ```
 
 ## TLDs in a Table
@@ -125,7 +128,8 @@ mastodon %>%
   scale_y_continuous(breaks = seq(0, 10000, 100), minor_breaks = seq(0, 10000, 25)) +
   labs(title = "Number of Mastodon Instances",
        subtitle = "Switched to Instance List at instances.mastodon.xyz on Apr 7",
-       x = "Date", y = "N")
+       x = "Date", y = "N",
+       caption = latest_timestamp)
 ```
 
 ## Number of Users per Instance
@@ -147,7 +151,8 @@ mastodon %>%
   scale_y_continuous(breaks = seq(0, 1000, 25), minor_breaks = seq(0, 1000, 5)) +
   theme(axis.text.x = element_text(angle = 45, vjust = 0.4)) +
   labs(title = "Number of Users per Mastodon Instance",
-       x = "User Count of Instance", y = "Frequency of Instances of that Size")
+       x = "User Count of Instance", y = "Frequency of Instances of that Size",
+       caption = latest_timestamp)
 ```
 
 ## Top Instance History
@@ -166,7 +171,8 @@ mastodon %>%
   scale_color_brewer(palette = "Set2") +
   labs(title = "Top 5 Mastodon Instances over Time",
        subtitle = "User Counts from instances.mastodon.xyz",
-       x = "Date", y = "User #", color = "Instance")
+       x = "Date", y = "User #", color = "Instance",
+       caption = latest_timestamp)
 ```
 
 
@@ -183,7 +189,8 @@ mastodon %>%
   scale_fill_brewer(palette = "Set1") +
   labs(title = "Mastodon Instances by Registration Status",
        subtitle = "Excluding Instances with Unknown Registration Status",
-       y = "# of Instances", x = "Date", fill = "Registration")
+       y = "# of Instances", x = "Date", fill = "Registration",
+       caption = latest_timestamp)
 ```
 
 ## IPv6 Status
@@ -199,7 +206,8 @@ mastodon %>%
   scale_fill_brewer(palette = "Set1") +
   labs(title = "Mastodon Instances by IPv6 Status",
        subtitle = "Excluding Instances with Unknown IPv6 Status",
-       y = "# of Instances", x = "Date", fill = "Handles IPv6")
+       y = "# of Instances", x = "Date", fill = "Handles IPv6",
+       caption = latest_timestamp)
 ```
 
 ## HTTPS Score
@@ -225,7 +233,8 @@ mastodon %>%
                                "Problematic" = "darkred",
                                "Other" = "gray")) +
   labs(title = "Mastodon Instances by HTTPS Rank",
-       y = "# of Instances", x = "HTTPS Rank", fill = "Status")
+       y = "# of Instances", x = "HTTPS Rank", fill = "Status",
+       caption = latest_timestamp)
 ```
 
 
@@ -240,7 +249,8 @@ mastodon %>%
   geom_histogram(binwidth = 100) +
   labs(title = "Number of Toots per Mastodon Instance",
        subtitle = "Excluding mastodon.social",
-       x = "Toot #", y = "Frequency")
+       x = "Toot #", y = "Frequency",
+       caption = latest_timestamp)
 ```
 
 # Users
@@ -254,7 +264,8 @@ mastodon %>%
   scale_y_continuous(labels = scales::comma_format()) +
   labs(title = "Number of Mastodon Users",
        subtitle = "Total # Across All Tracked Instances",
-       x = "Date", y = "N")
+       x = "Date", y = "N",
+       caption = latest_timestamp)
 ```
 
 ```{r users_2}
@@ -266,7 +277,8 @@ mastodon %>%
   scale_color_discrete(guide = F) +
   labs(title = "Number of Mastodon Users",
        subtitle = "Users per Instance",
-       x = "Date", y = "# of Toots")
+       x = "Date", y = "# of Toots",
+       caption = latest_timestamp)
 ```
 
 # Toots
@@ -280,7 +292,8 @@ mastodon %>%
   geom_col() +
   scale_y_continuous(labels = scales::comma_format()) +
   labs(title = "Number of Toots",
-       x = "Date", y = "# of Toots")
+       x = "Date", y = "# of Toots",
+       caption = latest_timestamp)
 ```
 
 ```{r toots_per_instance}
@@ -292,7 +305,8 @@ mastodon %>%
   scale_color_discrete(guide = F) +
   labs(title = "Number of Toots per Instance",
        subtitle = "Toots per Instance",
-       x = "Date", y = "N")
+       x = "Date", y = "N",
+       caption = latest_timestamp)
 ```
 
 
